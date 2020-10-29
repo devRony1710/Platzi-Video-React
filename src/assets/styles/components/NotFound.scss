@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
+
+// fuentes
+$font-primary: 'Grandstander', 'sans-serif';
+
+h1 {
+  font-size: 50px;
+  font-family: $font-primary;
+  color: white;
+  text-align: center;
+  margin-top: 300px;
+}
