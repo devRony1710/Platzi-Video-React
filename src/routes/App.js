@@ -6,15 +6,18 @@ import Home from '../containers/Home';
 import Login from '../containers/Login';
 import NotFound from '../containers/NotFound';
 import Register from '../containers/Register';
+import Layout from '../components/Layout'
 
 const App = () => (
   <BrowserRouter>
-    <Switch>
-      <Route exact path='/' component={Home}></Route>
-      <Route exact path='/Login' component={Login}></Route>
-      <Route exact path='/Register' component={Register}></Route>
-      <Route component={NotFound}></Route>
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route exact path='/' component={Home}></Route>
+        <Route exact path='/Login' component={Login}></Route>
+        <Route exact path='/Register' component={Register}></Route>
+        <Route component={NotFound}></Route>
+      </Switch>
+    </Layout>
   </BrowserRouter>
 );
 

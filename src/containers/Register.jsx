@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 // styles
 import '../assets/styles/components/Register.scss';
@@ -13,7 +14,9 @@ const Register = () => (
         <input type='password' placeholder='Contraseña' />
       </form>
       <button className='button'>Registrarme</button>
-      <a href='../login/login.html'>Iniciar sesión</a>
+      <Link to='/Login'>
+        Iniciar sesión
+      </Link>
     </section>
   </section>
 );
