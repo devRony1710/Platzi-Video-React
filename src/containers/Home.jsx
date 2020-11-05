@@ -1,5 +1,8 @@
 import React from 'react';
 
+// redux
+import { connect } from 'react-redux';
+
 //Custom Hooks
 import useInitialState from '../hooks/useInitialState';
 
@@ -12,23 +15,19 @@ import CarouselItem from '../components/CarouselItem';
 //Styles
 import '../assets/styles/App.scss';
 
-// API
-const API = 'http://localhost:3000/initalState';
-
-const Home = () => {
-  const initialState = useInitialState(API);
+const Home = ({ myList, trends, originals }) => {
   return (
     <>
       <Search />
 
-      {initialState.mylist.lenght === 0 ? (
+      {myList.lenght === 0 ? (
         <Categories title='Mi lista'>
           <h3>Your List is Empty</h3>
         </Categories>
       ) : (
         <Categories title='Mi Lista'>
           <Carousel>
-            {initialState.mylist.map((item) => (
+            {myList.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
               <CarouselItem key={item.id} {...item} />
             ))}
@@ -38,7 +37,7 @@ const Home = () => {
 
       <Categories title='Tendencias'>
         <Carousel>
-          {initialState.trends.map((item) => (
+          {trends.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
@@ -47,15 +46,22 @@ const Home = () => {
 
       <Categories title='Originales de Platzi Video'>
         <Carousel>
-          {initialState.originals.map((item) => (
+          {originals.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
       </Categories>
-
     </>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    myList: state.myList,
+    trends: state.trends,
+    originals: state.originals,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);
