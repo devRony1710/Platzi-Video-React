@@ -29,7 +29,7 @@ const Home = ({ myList, trends, originals }) => {
           <Carousel>
             {myList.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
-              <CarouselItem key={item.id} {...item} />
+              <CarouselItem key={item.id} {...item} isList />
             ))}
           </Carousel>
         </Categories>
