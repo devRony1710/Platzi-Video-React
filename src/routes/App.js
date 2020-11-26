@@ -6,7 +6,8 @@ import Home from '../containers/Home';
 import Login from '../containers/Login';
 import NotFound from '../containers/NotFound';
 import Register from '../containers/Register';
-import Layout from '../components/Layout'
+import Layout from '../components/Layout';
+import Player from '../containers/Player';
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
         <Route exact path='/' component={Home}></Route>
         <Route exact path='/Login' component={Login}></Route>
         <Route exact path='/Register' component={Register}></Route>
+        <Route exact path='/player/:id' component={Player}></Route>
         <Route component={NotFound}></Route>
       </Switch>
     </Layout>

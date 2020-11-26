@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//PropTypes
+import propTypes from 'prop-types';
+
 //redux
 import { connect } from 'react-redux';
+
+//actions
+import { logoutRequest } from '../actions';
 
 // Styles
 import '../assets/styles/components/Header.scss';
@@ -17,6 +23,10 @@ import gravatar from '../utils/gravatar';
 const Header = (props) => {
   const { user } = props;
   const hasUser = Object.keys(user).length > 0;
+
+  const handleLogout = () => {
+    props.logoutRequest({});
+  };
 
   return (
     <header className='header'>
@@ -33,21 +43,42 @@ const Header = (props) => {
           <p>Perfil</p>
         </div>
         <ul>
-          <li>
-            <a href='/'>Cuenta</a>
-          </li>
-          <li>
-            <Link to='/Login'>Cerrar Sesión</Link>
-          </li>
+          {hasUser ? (
+            <li>
+              <Link to='/'>{user.name}</Link>
+            </li>
+          ) : null}
+          {hasUser ? (
+            <li>
+              <Link to='#logout' onClick={handleLogout}>
+                {' '}
+                Cerrar Sesión
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to='/Login'>Iniciar Sesión</Link>
+            </li>
+          )}
         </ul>
       </div>
     </header>
   );
 };
+
+Header.propTypes = {
+  user: propTypes.object.isRequired,
+  logoutRequest: propTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => {
   return {
     user: state.user,
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = {
+  logoutRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
